@@ -1,0 +1,68 @@
+# robots.txt — AI crawler allowlist
+# Maintained by Flow.OS · https://flowos.digital · MIT
+# ---------------------------------------------------------------------------
+# Goal: be eligible for citation in ChatGPT, Perplexity, Gemini, Copilot, Claude.
+# If these user-agents can't reach you, your on-page AEO is invisible.
+# robots.txt governs polite crawlers only — also configure your CDN/edge
+# (see cloudflare/SETUP.md), which is where most AI bots are actually blocked.
+#
+# Tags below:  [CITATION] = surfaces you in AI answers   [TRAINING] = model corpora
+# To allow citation but opt out of training, set the [TRAINING] agents to Disallow: /
+# ---------------------------------------------------------------------------
+
+# --- OpenAI ---
+User-agent: OAI-SearchBot        # [CITATION] powers ChatGPT Search results
+Allow: /
+
+User-agent: ChatGPT-User         # [CITATION] user-triggered fetches from ChatGPT
+Allow: /
+
+User-agent: GPTBot               # [TRAINING] OpenAI crawler
+Allow: /
+
+# --- Anthropic (Claude) ---
+User-agent: ClaudeBot            # [CITATION] Claude web fetch & search
+Allow: /
+
+User-agent: Claude-User          # [CITATION] user-triggered fetches from Claude
+Allow: /
+
+User-agent: anthropic-ai         # [TRAINING] legacy Anthropic agent
+Allow: /
+
+# --- Perplexity ---
+User-agent: PerplexityBot        # [CITATION] indexes pages for Perplexity answers
+Allow: /
+
+User-agent: Perplexity-User      # [CITATION] user-triggered fetches
+Allow: /
+
+# --- Google ---
+User-agent: Google-Extended      # [TRAINING] Gemini/Vertex only — NOT Search/Googlebot
+Allow: /
+
+# --- Apple ---
+User-agent: Applebot             # [CITATION] Siri / Spotlight
+Allow: /
+
+User-agent: Applebot-Extended    # [TRAINING] Apple Intelligence corpus
+Allow: /
+
+# --- Microsoft / Common Crawl / Amazon / Meta / ByteDance ---
+User-agent: CCBot                # [TRAINING] Common Crawl seeds many LLMs
+Allow: /
+
+User-agent: Amazonbot            # [CITATION] Alexa / Amazon answers
+Allow: /
+
+User-agent: Meta-ExternalAgent   # [TRAINING] Meta AI
+Allow: /
+
+User-agent: Bytespider           # [TRAINING] ByteDance / Doubao
+Allow: /
+
+# --- Default: your normal policy for everyone else ---
+User-agent: *
+Allow: /
+
+Sitemap: https://example.com/sitemap.xml
