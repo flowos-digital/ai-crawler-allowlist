@@ -16,9 +16,9 @@ Two silent failure modes keep well-optimised sites out of AI answers:
    `PerplexityBot`, `ClaudeBot`, …). If your rules don't address them, edge cases and
    over-broad `Disallow` blocks can shut them out.
 2. **The edge layer.** CDNs increasingly block AI crawlers **by default** — Cloudflare's
-   Pay-Per-Crawl returns **HTTP 402** to unlisted AI bots on new onboardings. Your
-   `robots.txt` can say *Allow* while the edge silently returns 402 and the crawler never
-   reaches origin.
+   managed "Block AI Scrapers and Crawlers" rule returns **HTTP 403**, and Pay-Per-Crawl
+   returns **402**, to AI bots on many onboardings. Your `robots.txt` can say *Allow* while
+   the edge silently turns the crawler away before it ever reaches origin.
 
 This repo addresses both.
 
@@ -40,6 +40,11 @@ This repo addresses both.
    ```
    Every row should read `200`. A `402` means Pay-Per-Crawl is blocking; `403` means a
    WAF/bot rule is.
+
+   > **Read the result correctly.** `verify.sh` sends each bot's user-agent from *your*
+   > machine, so it tests user-agent-level blocking only. Real crawlers are also validated
+   > by IP/ASN — a `403` is a strong signal to investigate, but confirm in your CDN's bot
+   > analytics or server logs that *verified* bots get `200`.
 
 ## Allow citation, control training (optional)
 
